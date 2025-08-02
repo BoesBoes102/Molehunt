@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 public class GameListener implements Listener {
 
@@ -37,8 +39,18 @@ public class GameListener implements Listener {
         Player player = event.getPlayer();
         MoleHuntGame game = plugin.getGame();
 
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = scoreboard.getTeam("hidden_names");
+        if (team != null && !team.hasEntry(player.getName())) {
+            team.addEntry(player.getName());
+        }
+        player.setPlayerListName(" ");
+        player.setScoreboard(scoreboard);
+
         Location spawnLoc = getHighestLocation(player.getWorld());
-        player.teleport(spawnLoc);
+        if (spawnLoc != null) {
+            player.teleport(spawnLoc);
+        }
 
         if (game.isRunning()) {
             GamePlayer gp = game.getGamePlayer(player);
@@ -48,6 +60,7 @@ public class GameListener implements Listener {
             }
         }
     }
+
 
     private Location getHighestLocation(World world) {
         int y = world.getMaxHeight();

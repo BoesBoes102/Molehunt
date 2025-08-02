@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.util.Objects;
 
@@ -29,6 +31,15 @@ public class MoleHuntPlugin extends JavaPlugin {
         Objects.requireNonNull(getCommand("molehunt")).setExecutor(new MoleHuntCommand(this));
         Objects.requireNonNull(getCommand("molehunt")).setTabCompleter(new MoleHuntCommand(this));
         getServer().getPluginManager().registerEvents(new GameListener(this), this);
+
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = scoreboard.getTeam("hidden_names");
+        if (team == null) {
+            team = scoreboard.registerNewTeam("hidden_names");
+        }
+        team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
+
+
     }
 
     public MoleHuntGame getGame() {
