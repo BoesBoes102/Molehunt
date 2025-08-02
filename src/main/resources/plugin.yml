@@ -1,0 +1,13 @@
+name: MoleHunt
+version: 1.2
+main: com.boes.molehunt.MoleHuntPlugin
+api-version: "1.21"
+commands:
+  molehunt:
+    description: Main command for Mole Hunt
+    usage: /molehunt <start|stop|reload>
+    permission: molehunt.admin
+
+permissions:
+  molehunt.admin:
+    default: op

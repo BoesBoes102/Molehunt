@@ -1,0 +1,8 @@
+mole-count: 1
+game-time: 5400
+grace-period: 900
+#above is in seconds!
+world-border:
+  start-size: 2500
+  end-size: 250
+  shrink-time-threshold: 900
