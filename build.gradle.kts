@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.boes.molehunt"
-version = "1.2"
+version = "1.3"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ java {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
 }
 
 tasks {

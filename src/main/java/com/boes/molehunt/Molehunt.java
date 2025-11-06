@@ -1,18 +1,15 @@
 package com.boes.molehunt;
 
-import com.boes.molehunt.command.MoleHuntCommand;
+import com.boes.molehunt.commands.CommandManager;
 import com.boes.molehunt.game.MoleHuntGame;
-import com.boes.molehunt.listener.GameListener;
+import com.boes.molehunt.listener.*;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.WorldBorder;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-import java.util.Objects;
 
-public class MoleHuntPlugin extends JavaPlugin {
+public class Molehunt extends JavaPlugin {
 
     private MoleHuntGame game;
 
@@ -20,17 +17,16 @@ public class MoleHuntPlugin extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
-        World world = Bukkit.getWorlds().getFirst();
-        if (world != null) {
-            WorldBorder border = world.getWorldBorder();
-            border.setSize(20);
-        }
-
         this.game = new MoleHuntGame(this);
+        this.game.prepareGameWorld();
 
-        Objects.requireNonNull(getCommand("molehunt")).setExecutor(new MoleHuntCommand(this));
-        Objects.requireNonNull(getCommand("molehunt")).setTabCompleter(new MoleHuntCommand(this));
-        getServer().getPluginManager().registerEvents(new GameListener(this), this);
+        getCommand("molehunt").setExecutor(new CommandManager(this));
+
+        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new PVPListener(this), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(this), this);
+        getServer().getPluginManager().registerEvents(new DragonListener(this),this);
+        getServer().getPluginManager().registerEvents(new TeleportListener(this), this);
 
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         Team team = scoreboard.getTeam("hidden_names");

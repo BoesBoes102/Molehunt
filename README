@@ -1,17 +1,45 @@
-# MOLEHUNT
+# Molehunt
 
-/molehunt start to start
-/molehunt stop to stop
-/molehunt reload to reload the config
+A Minecraft server plugin that adds an Among Us-style multiplayer game mode to your server!
 
-config is in seconds read carefully
-place your own enderportal at spawn if you want
-have fun
--boes
-# license
-MIT
+## 📖 Overview
 
-# contact
-you are free to fork this and add stuf just give some credit
-want changes or suggestions message me on discord
-BoesBoes102
+Molehunt is a social deduction game where players are randomly assigned roles at the start of each game.
+
+**Innocents** win by either:
+- Defeating the dragon boss
+- Eliminating all moles
+
+**Moles** win by:
+- Killing all innocents before they achieve their objectives
+- Preventing the dragon from being defeated
+
+A grace period at the start protects players, then the world border begins shrinking, creating pressure and forcing encounters.
+
+## ✍️ Commands
+
+**Admin Commands:**
+- `/molehunt start` - Starts a new game with configured number of moles
+- `/molehunt stop` - Stops the current game and returns all players
+- `/molehunt reload` - Reloads the plugin configuration
+
+**Player Commands:**
+- `/molehunt spectate` - Join an ongoing game as a spectator (non-participants only)
+- `/molehunt leave` - Leave spectator mode and return to your original location
+
+## ⚙️ Configuration
+
+The following settings can be customized in the config file:
+- **mole-count** - Number of moles per game
+- **game-time-minutes** - Total game duration in minutes
+- **grace-period-minutes** - PvP protection duration at game start
+- **world-border.start-size** - Initial world border size
+- **world-border.end-size** - Final world border size
+- **world-border.shrink-time-threshold-minutes** - When to start shrinking the border
+
+## 📥 Installation
+
+1. Download the latest release from GitHub
+2. Place the JAR file in your server's `plugins/` directory
+3. Restart your server
+4. Configure settings in the generated `plugins/Molehunt/config.yml` (optional)
